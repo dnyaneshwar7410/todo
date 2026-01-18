@@ -49,17 +49,31 @@
           <div class="task-list border rounded bg-white p-2">
             {% for task in tasks %}
             <div class="card mb-2">
-              <div class="card-body d-flex justify-content-between align-items-center">
+              <div
+                class="card-body d-flex justify-content-between align-items-center"
+              >
                 {{ task.task }}
                 <div>
-                  <a class="btn btn-success btn-sm">
+                  <a
+                    href="{% url 'mark_as_done' task.pk %}"
+                    class="btn btn-success btn-sm"
+                  >
                     <i class="fa fa-check"></i>
+                    Mark as done
                   </a>
-                  <a class="btn btn-danger btn-sm">
+                  <a
+                    href='{% url "delete_task" task.pk %}'
+                    class="btn btn-danger btn-sm"
+                  >
                     <i class="fa fa-trash"></i>
+                    Delete
                   </a>
-                  <a class="btn btn-primary btn-sm">
+                  <a
+                    href="{% url 'edit_task' task.pk %} "
+                    class="btn btn-primary btn-sm"
+                  >
                     <i class="fa fa-pencil"></i>
+                    Edit
                   </a>
                 </div>
               </div>
@@ -73,11 +87,21 @@
         <!-- RIGHT SIDE -->
         <div class="col-md-5">
           <h5>Completed Tasks</h5>
+          {% for task in completed_task %}
           <div class="card">
             <div class="card-body text-muted">
-              No completed tasks
+              {{task.task}}
+              <a
+                href="{% url 'mark_as_undone' task.pk %}"
+                class="btn btn-warning"
+              >
+                <span aria-hidden="true">&times;</span>
+
+                mark as undone
+              </a>
             </div>
           </div>
+          {% endfor %}
         </div>
       </div>
 
